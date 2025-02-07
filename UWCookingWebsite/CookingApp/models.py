@@ -9,3 +9,5 @@ class Recipe(models.Model):
     cuisine = models.CharField(max_length=100)
     time = models.CharField(max_length=100)
     meal_type = models.CharField(max_length=100)
+    images = models.ImageField(default='',upload_to='Recipe_Images/')
+
