@@ -16,7 +16,7 @@ class Recipe(models.Model):
     ingredients = models.TextField(default='')
     procedure = models.TextField(default='')
 
-class cooking_class(models.Model):
+class Cooking_Class(models.Model):
     images = models.ImageField(default='',upload_to='Cooking_Class_Images/')
     date = models.DateField()
     instructor = models.CharField(max_length=200,default='')
