@@ -4,11 +4,26 @@
     {%for recipe in recipes %}
     <li>
         {{recipe.name}}
+        <div></div>
         <img src="{{recipe.images.url}}">
+        <div></div>
+        Description: {{recipe.description}}
+        <div></div>
+        Difficulty Level: {{recipe.difficulty}}
+        <div></div>
+        Prep Time: {{recipe.prep_time}}
+        <div></div>
+        Cook Time: {{recipe.cook_time}}
+        <div></div>
+        Total Time: {{recipe.total_time}}
+        <div></div>
+        Serving Size: {{recipe.serving_size}}
+        <div></div>
+        Equipment: {{recipe.equipment}}
         <div></div>
         Ingredients: {{recipe.ingredients}}
         <div></div>
-        Cuisine: {{recipe.cuisine}}
+        Procedure: {{recipe.procedure}}
         <div></div>
         <div></div>
     </li>
