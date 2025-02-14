@@ -4,7 +4,7 @@ from django.db import models
 
 class Recipe(models.Model):
     name = models.CharField(max_length=200)
-    images = models.ImageField(default='',upload_to='Recipe_Images/')
+    images = models.ImageField(default='',upload_to='recipe_images')
     cooking_class = models.CharField(max_length=200,default='')
     description = models.TextField(default='')
     difficulty = models.DecimalField(max_digits=2,decimal_places=1,default=0.0)
@@ -16,11 +16,19 @@ class Recipe(models.Model):
     ingredients = models.TextField(default='')
     procedure = models.TextField(default='')
 
+    def __str__(self):
+        return self.name
+    
+
 class Cooking_Class(models.Model):
-    images = models.ImageField(default='',upload_to='Cooking_Class_Images/')
+    name = models.CharField(max_length=200,default='unnamed class')
+    images = models.ImageField(default='',upload_to='class_images')
     date = models.DateField()
     instructor = models.CharField(max_length=200,default='')
     recipes = models.TextField(default='')
+
+    def __str__(self):
+        return self.name
 
 
 
