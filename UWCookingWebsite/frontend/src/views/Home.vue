@@ -35,10 +35,6 @@
   <script setup>
   import { ref, onMounted } from 'vue'
   import axios from 'axios' // or import apiClient if used
-  
-  // Using a lazy-loading directive (e.g. vue-lazyload) or custom directive
-  // v-lazy is only recognized if you installed a lazy load plugin, else remove v-lazy usage.
-  
   const latestEvent = ref(null)
   
   onMounted(async () => {
@@ -52,6 +48,5 @@
   </script>
   
   <style scoped>
-  /* If you haven't installed a lazy loading library, remove `v-lazy` above or implement your own directive. */
   </style>
   
