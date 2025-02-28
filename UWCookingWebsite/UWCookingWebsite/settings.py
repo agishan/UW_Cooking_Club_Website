@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,7 @@ SECRET_KEY = 'django-insecure-btb%&)j!n*u^j$(khu=fggmikrpq@s!_ly9=@-6ywdj&7a-5io
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 # Dynamic MEDIA_ROOT
 MEDIA_ROOT = BASE_DIR / "Media"
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'CookingApp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
