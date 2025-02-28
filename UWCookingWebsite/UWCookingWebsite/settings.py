@@ -27,7 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-MEDIA_ROOT = "C:\\Users\\Brandon\\Documents\\GitHub\\UW_Cooking_Club_Website\\UWCookingWebsite\\Media"
+# Dynamic MEDIA_ROOT
+MEDIA_ROOT = BASE_DIR / "Media"
+
+# Media URL for serving files
+MEDIA_URL = "/media/"
 
 # Application definition
 
