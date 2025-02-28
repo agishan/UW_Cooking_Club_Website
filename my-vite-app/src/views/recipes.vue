@@ -1,28 +1,76 @@
 <template>
-    <div class="home-page">
-      <!-- Hero / About / etc. -->
-      <section class="hero">
-        <h1>University of Waterloo Cooking Club</h1>
-        <p>Join us to explore recipes, hone your cooking skills, and make new friends!</p>
-      </section>
+    <div>
+      <h1>Recipes</h1>
+      <ul>
+        <!-- Loop through each recipe item -->
+        <li v-for="recipe in items" :key="recipe.id">
+          <h2>{{ recipe.name }}</h2>
   
-      <section class="about">
-        <h2>Who Are We?</h2>
-        <p>We are a group of enthusiastic students who love exploring new cuisines...</p>
-      </section>
+          <!-- Construct the image URL by extracting the filename -->
+          <img
+            :src="imageUrl(recipe.images)"
+            alt="Recipe Image"
+          />
+  
+          <p>Description: {{ recipe.description }}</p>
+          <p>Difficulty Level: {{ recipe.difficulty }}</p>
+          <p>Prep Time: {{ recipe.prep_time }}</p>
+          <p>Cook Time: {{ recipe.cook_time }}</p>
+          <p>Total Time: {{ recipe.total_time }}</p>
+          <p>Serving Size: {{ recipe.serving_size }}</p>
+          <p>Equipment: {{ recipe.equipment }}</p>
+          <p>Ingredients: {{ recipe.ingredients }}</p>
+          <p>Procedure: {{ recipe.procedure }}</p>
+        </li>
+      </ul>
     </div>
   </template>
   
   <script>
   export default {
-    name: 'HomePage',
+    name: 'Recipes',
+    data() {
+      return {
+        items: [],
+      }
+    },
+    mounted() {
+      fetch('http://127.0.0.1:8000/recipeAPI/')
+        .then(response => response.json())
+        .then(recipeJSON => {
+          // Assuming the API response is something like { recipes: [...] }
+          this.items = recipeJSON.recipes
+        })
+        .catch(error => {
+          console.error('Error fetching recipes:', error)
+        })
+    },
+    methods: {
+      imageUrl(imagePath) {
+
+        const fileName = imagePath.split('/').pop()
+        return `http://127.0.0.1:8000/media/recipe_images/${fileName}`
+      }
+    }
   }
   </script>
   
   <style scoped>
-  /* Page-specific styling */
-  .home-page {
-    /* ... */
+  /* Scoped to this component only */
+  h1 {
+    margin-bottom: 1rem;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 2rem;
+  }
+  img {
+    height: 100px;
+    display: block;
+    margin: 0.5rem 0;
   }
   </style>
   

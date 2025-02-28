@@ -3,10 +3,10 @@
       <img
         class="logo"
         alt="UW Cooking Club Logo"
-        src="./assets/uwcooking_icon.png"
+        src="../assets/uwcooking_icon.png"
       />
       <nav class="nav">
-        <!-- Use <router-link> instead of <a> for in-app navigation -->
+        <router-link to="/">Home</router-link>
         <router-link to="/recipes">Recipes</router-link>
         <router-link to="/events">Events</router-link>
         <router-link to="/about">About Us</router-link>
@@ -37,9 +37,7 @@
   .nav {
     display: flex;
   }
-  
-  /* The default <router-link> renders an <a> tag under the hood,
-     so you can style it with .nav a { ... } */
+
   .nav a {
     margin: 0 1rem;
     text-decoration: none;

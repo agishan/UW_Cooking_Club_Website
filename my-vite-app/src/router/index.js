@@ -1,6 +1,6 @@
 // src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../views/HomePage.vue' // or wherever you placed it
+import HomePage from '../views/HomePage.vue' 
 import RecipesPage from '../views/recipes.vue'
 import EventsPage from '../views/events.vue'
 import AboutUsPage from '../views/aboutUs.vue'

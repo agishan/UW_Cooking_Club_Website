@@ -19,10 +19,3 @@
   }
   </script>
   
-  <style scoped>
-  /* Page-specific styling */
-  .home-page {
-    /* ... */
-  }
-  </style>
-  
