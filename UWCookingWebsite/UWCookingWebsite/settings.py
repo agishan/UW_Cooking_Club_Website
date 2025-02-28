@@ -29,8 +29,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-MEDIA_URL = '/media/'  # This defines the URL path for media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # This is where media files are stored
+# Dynamic MEDIA_ROOT
+MEDIA_ROOT = BASE_DIR / "Media"
+
+# Media URL for serving files
+MEDIA_URL = "/media/"
 
 # Application definition
 
