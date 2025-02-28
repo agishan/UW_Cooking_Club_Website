@@ -11,3 +11,19 @@
 - Vue 3  
 - Vite (build tool)  
 - Tailwind CSS (utility-first CSS framework)
+
+## Getting Started
+
+### Django
+```
+cd UWCookingWebsite
+python manage.py runserver
+```
+
+### Vue / Front End
+New Terminal
+```
+cd my-vite-app
+npm install
+npm run dev
+```
