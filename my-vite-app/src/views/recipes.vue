@@ -35,7 +35,7 @@
       }
     },
     mounted() {
-      fetch('http://127.0.0.1:8000/recipeAPI/')
+      fetch('http://127.0.0.1:8000//api/recipes/')
         .then(response => response.json())
         .then(recipeJSON => {
           // Assuming the API response is something like { recipes: [...] }
@@ -49,7 +49,7 @@
       imageUrl(imagePath) {
 
         const fileName = imagePath.split('/').pop()
-        return `http://127.0.0.1:8000/media/recipe_images/${fileName}`
+        return `http://127.0.0.1:8000/cdn/media/recipe_images/${fileName}`
       }
     }
   }
