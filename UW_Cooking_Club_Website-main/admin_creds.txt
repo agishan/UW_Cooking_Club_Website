@@ -1,0 +1,5 @@
+SuperUser credentials to add new model objects
+
+Username: brandon
+Email Address: (blank dont put anything)
+Password: cooking123
