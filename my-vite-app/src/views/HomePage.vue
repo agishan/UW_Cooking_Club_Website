@@ -14,7 +14,7 @@
 
    <!-- Events Section -->
    <section class="events">
-   <h2> Check Our Upcoming Events 221!</h2>
+   <h2> Check Our Upcoming Events</h2>
    <div class="event-grid">
    <div class = "event-card">
    img src= "https://www.flickr.com/photos/201336313@N05/54303686646/in/album-72177720323571682" alt="Iran Food">
