@@ -12,30 +12,13 @@
           <input type="text" placeholder="Search recipes...">
         </div>
         <div class="recipe-grid">
-          <div class="recipe-item">
-            <img class="food-pic" alt="food" src="../assets/images/pasta3_temp.png"/>
-            <p>[Food name]</p>
-          </div>
-          <div class="recipe-item">
-            <img class="food-pic" alt="food" src="../assets/images/pasta3_temp.png"/>
-            <p>[Food name]</p>
-          </div>
-          <div class="recipe-item">
-            <img class="food-pic" alt="food" src="../assets/images/pasta3_temp.png"/>
-            <p>[Food name]</p>
-          </div>
-          <div class="recipe-item">
-            <img class="food-pic" alt="food" src="../assets/images/pasta3_temp.png"/>
-            <p>[Food name]</p>
-          </div>
-          <div class="recipe-item">
-            <img class="food-pic" alt="food" src="../assets/images/pasta3_temp.png"/>
-            <p>[Food name]</p>
-          </div>
-          <div class="recipe-item">
-            <img class="food-pic" alt="food" src="../assets/images/pasta3_temp.png"/>
-            <p>[Food name]</p>
-          </div>
+          <li v-for="recipe in items" :key="recipe.id" >
+            <!-- Construct the image URL by extracting the filename -->
+            <div class="recipe-item">
+              <img class="food-pic" alt="food" :src="imageUrl(recipe.images)"/>
+              <p>{{ recipe.name }}</p>
+            </div>
+        </li>
         </div>
       </div>
         <div class="footer">
@@ -189,6 +172,7 @@
       justify-content: center;
       gap: 20px;
       width: 80%;
+      height: 100%;
       margin: auto;
       padding: 15px;
       border-radius: 7px;
