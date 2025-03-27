@@ -37,6 +37,16 @@ def event_list(request):
     serializer = EventSerializer(events, many=True)
     return Response({"events": serializer.data})
 
+# API to get a single event by ID
+@api_view(['GET'])
+def event_detail(request, event_id):
+    try:
+        event = Cooking_Class.objects.get(id=event_id)
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
+    except Cooking_Class.DoesNotExist:
+        return Response({"error": "Event not found"}, status=404)
+
 # Serve images
 def get_image(request, path=""):
     """

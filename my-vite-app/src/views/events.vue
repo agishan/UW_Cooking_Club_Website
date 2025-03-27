@@ -15,12 +15,14 @@
             <div class="carousel-track">
                 <li v-for="event in items" :key="event.id" >
                   <!-- Construct the image URL by extracting the filename -->
-                  <div class="event" v-if="new Date(event.date) > new Date()">
-                    <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
-                    <h3>{{ event.name }}</h3>
-                    <p>{{ event.instructor }}</p>
-                    <p><strong>{{ event.date }}</strong></p>
-                  </div>
+                  <router-link :to="`/events/${event.id}`">
+                    <div class="event" v-if="new Date(event.date) > new Date()">
+                      <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
+                      <h3>{{ event.name }}</h3>
+                      <p>{{ event.instructor }}</p>
+                      <p><strong>{{ event.date }}</strong></p>
+                    </div>
+                  </router-link>
                 </li>
             </div>
             <button class="next" onclick="moveSlide(1)">&#10095;</button>
@@ -31,12 +33,14 @@
           <div class="past-grid">
             <li v-for="event in items" :key="event.id" >
               <!-- Construct the image URL by extracting the filename -->
-              <div class="event" v-if="new Date(event.date) < new Date()">
-                <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
-                <h3>{{ event.name }}</h3>
-                <p>{{ event.instructor }}</p>
-                <p><strong>{{ event.date }}</strong></p>
-              </div>
+              <router-link :to="`/events/${event.id}`">
+                <div class="event" v-if="new Date(event.date) < new Date()">
+                  <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
+                  <h3>{{ event.name }}</h3>
+                  <p>{{ event.instructor }}</p>
+                  <p><strong>{{ event.date }}</strong></p>
+                </div>
+              </router-link>
             </li>
           </div>
 

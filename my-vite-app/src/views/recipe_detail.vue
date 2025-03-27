@@ -1,75 +1,43 @@
 <template>
-  <div class="events-page">
-    <body>
-      <div class="banner">
-        <div class="header">
-          <h1>Recipe Archive</h1>
-        </div>
-      </div>
-      <div class="content">
-        <div class="search-bar">🔍 
-          <i class="search-icon"></i>
-          <input type="text" placeholder="Search recipes...">
-        </div>
-        <div class="recipe-grid">
-          <li v-for="recipe in items" :key="recipe.id" >
-            <!-- Construct the image URL by extracting the filename -->
-            <router-link :to="`/recipes/${recipe.id}`">
-            <div class="recipe-item">
-              <img class="food-pic" alt="food" :src="imageUrl(recipe.images)"/>
-              <p>{{ recipe.name }}</p>
-            </div>
-            </router-link>
-          </li>
-        </div>
-      </div>
-        <div class="footer">
-            <div>©UWCC 2025</div>
-            <div>Our Socials
-              <a href="https://www.instagram.com/uwcookingclub/" target="_blank">
-                <img class="logo" alt="Instagram Icon" src="../assets/images/insta_icon.png"/>
-              </a>
-              <a href="https://discord.gg/ZdU7vEFJvn" target="_blank">
-                <img class="logo" alt="Discord Icon" src="../assets/images/discord_icon.png"/>
-              </a>
-            </div>
-        </div>
-      </body>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'Recipes',
-    data() {
-      return {
-        items: [],
-      }
+    <h1>{{ items.name }}</h1>
+    <h1>From: {{ items.cooking_class }}</h1>
+    <h1>Description</h1>
+    <h1>{{ items.description }}</h1>
+    <h1> Difficulty Level: {{ items.difficulty }}</h1>
+</template>
+
+<script>
+export default {
+  name: 'Recipes',
+  data() {
+    return {
+      items: {},
+    }
+  },
+  mounted() {
+    fetch(`http://127.0.0.1:8000/api/recipes/${this.$route.params.id}`)
+      .then(response => response.json())
+      .then(recipeJSON => {
+        // Directly assign the recipe object to "items" variable
+        this.items = recipeJSON // is expecting only one value (one recipe), not an array
+      })
+      .catch(error => {
+        console.error('Error fetching recipes:', error)
+      })
+  },
+  methods: {
+    imageUrl(imagePath) {
+      const fileName = imagePath.split('/').pop()
+      return `http://127.0.0.1:8000/cdn/media/recipe_images/${fileName}`
     },
-    mounted() {
-      fetch('http://127.0.0.1:8000//api/recipes/')
-        .then(response => response.json())
-        .then(recipeJSON => {
-          // Assuming the API response is something like { recipes: [...] }
-          this.items = recipeJSON.recipes
-        })
-        .catch(error => {
-          console.error('Error fetching recipes:', error)
-        })
-    },
-    methods: {
-      imageUrl(imagePath) {
-        const fileName = imagePath.split('/').pop()
-        return `http://127.0.0.1:8000/cdn/media/recipe_images/${fileName}`
-      },
-      clickMethod() {
-        //add code that you wish to happen on click
-      }
+    clickMethod() {
+      //add code that you wish to happen on click
     }
   }
-  </script>
-  
-  <style scoped>
+}
+</script>
+
+<style scoped>
   /* Scoped to this component only */
   body {
       text-align: center;
