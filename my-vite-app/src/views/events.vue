@@ -15,7 +15,7 @@
             <div class="carousel-track">
                 <li v-for="event in items" :key="event.id" >
                   <!-- Construct the image URL by extracting the filename -->
-                  <div class="event" v-if="isFutureEvent">
+                  <div class="event" v-if="new Date(event.date) > new Date()">
                     <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
                     <h3>{{ event.name }}</h3>
                     <p>{{ event.instructor }}</p>
@@ -29,12 +29,9 @@
       <div class="past-events">
           <h2>Past Events</h2>
           <div class="past-grid">
-            <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
-            <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
-
             <li v-for="event in items" :key="event.id" >
               <!-- Construct the image URL by extracting the filename -->
-              <div class="event" v-if="event.date < new Date()">
+              <div class="event" v-if="new Date(event.date) < new Date()">
                 <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
                 <h3>{{ event.name }}</h3>
                 <p>{{ event.instructor }}</p>
@@ -85,14 +82,6 @@ export default {
       return `http://127.0.0.1:8000/cdn/media/class_images/${fileName}`
     }
   },
-  computed: {
-    isFutureEvent() {
-      return new Date(this.event.date) > new Date(); // Convert event.date to Date object
-    },
-    formattedEventDate() {
-      return new Date(this.event.date).toLocaleDateString(); // Format date nicely
-    }
-  }
 }
 </script>
 
@@ -173,6 +162,7 @@ body {
       
 .event h3 {
   margin: 10px 0;
+  color: black;
 }
       
 .event p {
