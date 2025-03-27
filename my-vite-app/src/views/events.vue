@@ -13,26 +13,17 @@
           <div class="carousel">
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
             <div class="carousel-track">
-                <div class="event">
-                  <img class="event-pic" alt="Event Picture 1" src="../assets/images/pasta_temp.png"/>
-                  <h3>Event Name</h3>
-                  <p>Event description goes here...</p>
-                  <p><strong>[date]</strong></p>
-                </div>
-                <div class="event">
-                  <img class="event-pic" alt="Event Picture 2" src="../assets/images/pasta2_temp.png"/>
-                  <h3>Event Name</h3>
-                  <p>Event description goes here...</p>
-                  <p><strong>[date]</strong></p>
-                </div>
-                <div class="event">
-                  <img class="event-pic" alt="Event Picture 3" src="../assets/images/pasta3_temp.png"/>
-                  <h3>Event Name</h3>
-                  <p>Event description goes here...</p>
-                  <p><strong>[date]</strong></p>
-                </div>
-              </div>
-              <button class="next" onclick="moveSlide(1)">&#10095;</button>
+                <li v-for="event in items" :key="event.id" >
+                  <!-- Construct the image URL by extracting the filename -->
+                  <div class="event" v-if="isFutureEvent">
+                    <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
+                    <h3>{{ event.name }}</h3>
+                    <p>{{ event.instructor }}</p>
+                    <p><strong>{{ event.date }}</strong></p>
+                  </div>
+                </li>
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
           </div>
       </div>
       <div class="past-events">
@@ -40,11 +31,18 @@
           <div class="past-grid">
             <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
             <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
-            <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
-            <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
-            <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
-            <img alt="Past Event" src="../assets/images/pasta3_temp.png"/>
+
+            <li v-for="event in items" :key="event.id" >
+              <!-- Construct the image URL by extracting the filename -->
+              <div class="event" v-if="event.date < new Date()">
+                <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
+                <h3>{{ event.name }}</h3>
+                <p>{{ event.instructor }}</p>
+                <p><strong>{{ event.date }}</strong></p>
+              </div>
+            </li>
           </div>
+
       </div>
       <div class="footer">
           <div>©UWCC 2025</div>
@@ -70,21 +68,29 @@ export default {
     }
   },
   mounted() {
-    fetch('http://127.0.0.1:8000//api/recipes/')
+    fetch('http://127.0.0.1:8000//api/events/')
       .then(response => response.json())
-      .then(recipeJSON => {
+      .then(eventJSON => {
         // Assuming the API response is something like { recipes: [...] }
-        this.items = recipeJSON.recipes
+        this.items = eventJSON.events
       })
       .catch(error => {
-        console.error('Error fetching recipes:', error)
+        console.error('Error fetching events:', error)
       })
   },
   methods: {
     imageUrl(imagePath) {
 
       const fileName = imagePath.split('/').pop()
-      return `http://127.0.0.1:8000/cdn/media/recipe_images/${fileName}`
+      return `http://127.0.0.1:8000/cdn/media/class_images/${fileName}`
+    }
+  },
+  computed: {
+    isFutureEvent() {
+      return new Date(this.event.date) > new Date(); // Convert event.date to Date object
+    },
+    formattedEventDate() {
+      return new Date(this.event.date).toLocaleDateString(); // Format date nicely
     }
   }
 }

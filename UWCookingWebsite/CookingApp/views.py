@@ -10,8 +10,8 @@ import mimetypes, posixpath
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Recipe
-from .serializers import RecipeSerializer
+from .models import Recipe, Cooking_Class
+from .serializers import RecipeSerializer, EventSerializer
 
 # API to get all recipes
 @api_view(['GET'])
@@ -29,6 +29,13 @@ def recipe_detail(request, recipe_id):
         return Response(serializer.data)
     except Recipe.DoesNotExist:
         return Response({"error": "Recipe not found"}, status=404)
+
+# API to get all events
+@api_view(['GET'])
+def event_list(request):
+    events = Cooking_Class.objects.all()
+    serializer = EventSerializer(events, many=True)
+    return Response({"events": serializer.data})
 
 # Serve images
 def get_image(request, path=""):

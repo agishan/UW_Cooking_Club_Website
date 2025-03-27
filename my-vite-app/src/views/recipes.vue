@@ -18,7 +18,7 @@
               <img class="food-pic" alt="food" :src="imageUrl(recipe.images)"/>
               <p>{{ recipe.name }}</p>
             </div>
-        </li>
+          </li>
         </div>
       </div>
         <div class="footer">
