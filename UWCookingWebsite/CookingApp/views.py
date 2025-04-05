@@ -10,8 +10,8 @@ import mimetypes, posixpath
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Recipe, Cooking_Class
-from .serializers import RecipeSerializer, EventSerializer
+from .models import Recipe, Cooking_Class, Club_Member
+from .serializers import RecipeSerializer, EventSerializer, ClubMemberSerializer
 
 # API to get all recipes
 @api_view(['GET'])
@@ -46,6 +46,23 @@ def event_detail(request, event_id):
         return Response(serializer.data)
     except Cooking_Class.DoesNotExist:
         return Response({"error": "Event not found"}, status=404)
+    
+# API to get all events
+@api_view(['GET'])
+def club_member_list(request):
+    club_members = Club_Member.objects.all()
+    serializer = ClubMemberSerializer(club_members, many=True)
+    return Response({"club_members": serializer.data})
+
+# API to get a single event by ID
+@api_view(['GET'])
+def club_member_detail(request, club_member_id):
+    try:
+        club_members = Club_Member.objects.get(id=club_member_id)
+        serializer = ClubMemberSerializer(club_members)
+        return Response(serializer.data)
+    except Club_Member.DoesNotExist:
+        return Response({"error": "Club member not found"}, status=404)
 
 # Serve images
 def get_image(request, path=""):

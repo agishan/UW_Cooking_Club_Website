@@ -146,6 +146,7 @@ body {
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease-in-out;
+  list-style-type: none;
 }
       
 .event {
@@ -206,6 +207,7 @@ body {
   gap: 20px;
   width: 80%;
   margin: auto;
+  list-style-type: none;
 }
       
 .footer {

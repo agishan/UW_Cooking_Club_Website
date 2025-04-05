@@ -167,6 +167,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
       margin-top: 20px;
+      list-style-type: none;
   }
           
   .recipe-item {

@@ -30,5 +30,19 @@ class Cooking_Class(models.Model):
     def __str__(self):
         return self.name
 
+class Club_Member(models.Model):
+    TEAM_CHOICES = [
+        ("ADMIN", "Admin"),
+        ("EVENTS", "Events"),
+        ("CONTENT", "Content"),
+    ]
+        
+    name = models.CharField(max_length=200)
+    team = models.CharField(max_length=200, choices=TEAM_CHOICES,default='ADMIN')
+    role = models.CharField(max_length=200)
+    images = models.ImageField(default='',upload_to='club_member_images')
+
+    def __str__(self):
+        return self.name
 
 
