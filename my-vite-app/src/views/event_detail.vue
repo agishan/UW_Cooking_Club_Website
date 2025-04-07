@@ -1,9 +1,26 @@
 <template>
     <h1>{{ items.name }}</h1>
+
+     <!-- Below line is in v-if statement cause data fetch from object isn't immediately available,
+     important so page doesn't crash  -->
+    <img v-if="items.images" :src="imageUrl_Events(items.images)">
+
     <h1>Date: {{ items.date }}</h1>
     <h1>Taught By: {{ items.instructor }}</h1>
     <h1>Recipes Cooked</h1>
-    <h1>{{ items.recipes }}</h1>
+    <div class="recipe-grid" v-if="items.recipes">
+      <li v-for="recipe in items.recipes" :key="recipe.id" >
+        <!-- Construct the image URL by extracting the filename -->
+        <router-link :to="`/recipes/${recipe.id}`">
+          <div class="recipe-item">
+            <img v-if="recipe.images" class="food-pic" alt="food" :src="imageUrl_Recipes(recipe.images)"/>
+            <p v-if="recipe.name">{{ recipe.name }}</p>
+          </div>
+        </router-link>
+
+      </li>
+    </div>
+
 </template>
 
 <script>
@@ -26,9 +43,13 @@ export default {
       })
   },
   methods: {
-    imageUrl(imagePath) {
+    imageUrl_Events(imagePath) {
       const fileName = imagePath.split('/').pop()
       return `http://127.0.0.1:8000/cdn/media/class_images/${fileName}`
+    },
+    imageUrl_Recipes(imagePath) {
+      const fileName = imagePath.split('/').pop()
+      return `http://127.0.0.1:8000/cdn/media/recipe_images/${fileName}`
     },
     clickMethod() {
       //add code that you wish to happen on click
@@ -135,6 +156,7 @@ export default {
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
       margin-top: 20px;
+      list-style-type: none;
   }
           
   .recipe-item {

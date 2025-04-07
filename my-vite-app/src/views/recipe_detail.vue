@@ -1,6 +1,12 @@
 <template>
     <h1>{{ items.name }}</h1>
-    <h1>From: {{ items.cooking_class }}</h1>
+
+    <!-- Below lines are in v-if statements cause data fetch from object isn't immediately available,
+     important so page doesn't crash  -->
+    <router-link v-if="items.cooking_class_new" :to="`/events/${items.cooking_class_new.id}`">
+      <h1>From: {{ items.cooking_class_new.name }}</h1>
+    </router-link>
+
     <h1>Description</h1>
     <h1>{{ items.description }}</h1>
     <h1> Difficulty Level: {{ items.difficulty }}</h1>
