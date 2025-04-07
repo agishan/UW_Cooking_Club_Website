@@ -16,7 +16,7 @@
                 <li v-for="event in items" :key="event.id" >
                   <!-- Construct the image URL by extracting the filename -->
                   <router-link :to="`/events/${event.id}`">
-                    <div class="event" v-if="new Date(event.date) > new Date()">
+                    <div class="event" v-if="new Date(event.date) >= new Date()">
                       <img class="event-pic" alt="Event Picture" :src="imageUrl(event.images)"/>
                       <h3>{{ event.name }}</h3>
                       <p>{{ event.instructor }}</p>

@@ -11,12 +11,18 @@
     <div class="recipe-grid" v-if="items.recipes">
       <li v-for="recipe in items.recipes" :key="recipe.id" >
         <!-- Construct the image URL by extracting the filename -->
-        <router-link :to="`/recipes/${recipe.id}`">
+        
           <div class="recipe-item">
-            <img v-if="recipe.images" class="food-pic" alt="food" :src="imageUrl_Recipes(recipe.images)"/>
-            <p v-if="recipe.name">{{ recipe.name }}</p>
+            <router-link :to="`/recipes/${recipe.id}`">
+              <img class="food-pic" alt="food" :src="imageUrl_Recipes(recipe.images)"/>
+              <p>{{ recipe.name }}</p>
+            </router-link>
+            <p>Prep Time: {{ recipe.prep_time }}</p>
+            <p>Cooking Time: {{ recipe.cook_time }}</p>
+            <p>Total Time: {{ recipe.total_time }}</p>
+            <p>Difficulty Level: {{ recipe.difficulty }}</p>
           </div>
-        </router-link>
+        
 
       </li>
     </div>
